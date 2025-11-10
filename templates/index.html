@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Dynamic Data</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Dynamic Data:</h1>
+    <div id="dynamic-data"></div>
+
+    <script>
+        $(document).ready(function() {
+            setInterval(function() {
+                $.ajax({
+                    url: '/update',
+                    type: 'GET',
+                    success: function(response) {
+                        $('#dynamic-data').html(response);
+                    }
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
