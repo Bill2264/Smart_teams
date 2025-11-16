@@ -5,21 +5,22 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Dynamic Data:</h1>
-    <div id="dynamic-data"></div>
+    <h1>Table</h1>
+    <div id="Table"></div>
 
-    <script>
-        $(document).ready(function() {
-            setInterval(function() {
-                $.ajax({
-                    url: '/update',
-                    type: 'GET',
-                    success: function(response) {
-                        $('#dynamic-data').html(response);
-                    }
-                });
-            }, 1000);
-        });
-    </script>
+    <table>
+  <tr>
+    <th>Date</th>
+    <th>Amount</th>
+    <th>type</th>
+    <th>Note</th>
+  </tr>
+  <tr>
+    <td>11/11/11</td>
+    <td>$100</td>
+    <td>Income</td>
+    <td>car wash</td>
+  </tr>
+</table> 
 </body>
 </html>
