@@ -1,7 +1,7 @@
 
 from flask import Flask 
 
-import numpy as np    # Using strings to see if words and description work 
+import numpy as np  # Using strings to see if words and description work 
 msg= "Budget tracker"
 print(msg)
 
