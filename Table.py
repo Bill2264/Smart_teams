@@ -1,18 +1,13 @@
-from flask import Flask, render_template
+from flask import Flask, render_template# type: ignore
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-   return render_template('index.html')
+class draw:
+    @app.route("/")
+    def index():
+        return render_template('index.html')
 
 
-@app.route("/")
-def end_table():
-    return render_template('end_table.html')
+Draw = draw()
 
-@app.route("/")
-def end():
-    return render_template('end.html')
-
-
+Draw.index
