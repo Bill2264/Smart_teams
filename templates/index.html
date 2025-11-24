@@ -5,6 +5,10 @@
 </head>
 <body>
     <h1>Table</h1>
+    <div id="Table"></div>
+<button id="load-items">Load Items</button>
+<ul id="items-list"></ul>
+
     <table>
       <tr>
         <th>Date</th>
@@ -13,12 +17,13 @@
         <th>Note</th>
       </tr>
       <tr>
-<td><div id="dynamic-content">Original Content</div>
-<script src="https://unpkg.com/@hotwired/turbo"></script></td>
-<td>
-</td>
-<td></td>
-<td></td>
+
+<script>
+$.ajax({
+url: '/update',
+method: 'row'
+});
+</script>
       </tr>
     </table>
     </body>
