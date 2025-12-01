@@ -14,15 +14,14 @@
         <th>type</th>
         <th>Note</th>
       </tr>
-      <tr>
-          <td><input type="date" id="date" name="date"></td>
-          <td><input type="number" id="amount" name="amount"></td>
-          <td><select name="type" id="type">
-        <option value="income">Income</option>
-        <option value="expense">Expense</option>
-      </select></td>
-          <td><input type="text" id="Note" name="Note"></td>
-      </tr>
+      {% for row in data %}
+        <tr>
+          <td>{{row.0}}</td>
+          <td>{{row.1}}</td>
+          <td>{{row.2}}</td>
+          <td>{{row.3}}</td>
+        </tr>
+      {% endfor %}
     </table>
     </body>
 </html>
