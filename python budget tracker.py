@@ -29,10 +29,10 @@ def add_expense(expenses):
     expenses.append(expense)
     
 expenses = []  # must be BEFORE the loop
-
+print("Expense Tracker Menu:")
 while True:
     # Initial attempt at making the very basic layout of the budget tracker
-    print("Expense Tracker Menu:")
+    
     print("1. Add Expense")
     print("2. Remove Expense")
     print("3. View Expense")
