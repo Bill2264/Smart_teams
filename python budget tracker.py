@@ -1,69 +1,100 @@
-import tkinter as tk
-from tkinter import ttk, messagebox, simpledialog
+from Calculations import Calculations
 
+calc = Calculations()
 
-#Class with budget tracker
+def add_expense_terminal():
+    date = input("Enter date (DD-MM-YYYY): ")
+    amount = input("Enter amount: ")
+    category = input("Enter category (e.g., Food, Rent, Transport): ")
+    
+    warning = calc.add_expense(date, amount, category)
+    print("\n\nExpense added successfully!")
+    if warning:
+        print(f" {warning}")
 
-class ExpenseTracker:
-    def __init__(self, date, description, amount):
-        self.date = date
-        self.description = description
-        self.amount= amount
+def remove_expense_terminal():
+    if not calc.get_all():
+        print("\n\nNo expense to remove. ")
+        return
+    
+    view_expenses_terminal()
+    try:
+        index = int(input("Enter the index of the expense to remove: "))
+        if 0 <= index < len(calc.get_all()):
+            calc.remove_expense(index)
+            print("\n\nExpense removed successfully!")
+        else:
+            print("\n\nInvalid index. No expense removed.")
+    except ValueError:
+        print("Invalid input. Please enter a number.")
 
+def edit_expense_terminal():
+    view_expenses_terminal()
+    index = int(input("Enter the index of the expense to edit: "))
+    date = input("Enter new date (DD-MM-YYYY): ")
+    amount = input("Enter new amount: ")
+    category = input("Enter new category: ")
+    warning = calc.edit_expense(index, date, amount, category)
+    print("\n\nExpense edited successfully!")
+    if warning:
+        print(f" {warning}")
 
-def add_expense(self, expense):
-    self.expenses.append(expense)
-
-def remove_expense(self, index):
-    if 0 <= index < len(self.expenses):
-        del self.expenses[index]
-        print("Expense removed successfully.")
-
+def view_expenses_terminal():
+    expenses = calc.get_all()
+    if not expenses:
+        print("\n\nNo expenses to show.")
+        return
     else:
-            print ("Invalid index. No expense removed.")
-def add_expense(expenses):
-    date = input("Enter date (YYYY-MM-DD): ")
-    description = input("Enter description: ")
-    amount = float(input("Enter amount: "))
-    expense = ExpenseTracker(date, description, amount)
-    expenses.append(expense)
-    
-expenses = []  # must be BEFORE the loop
-print("Expense Tracker Menu:")
+        print("\nIndex | Date       | Amount   | Category")
+    print("-"*50)
+    for idx, exp in enumerate(expenses):
+        print(f"{idx:<5} | {exp[0]:<10} | {exp[1]:<8} | {exp[2]:<10}")
+
+def total_expense_terminal():
+    total = calc.get_total()
+    print(f"\n\nTotal expenses: {total}")
+
+def weekly_budget_terminal():
+    amount = input("Enter your weekly budget amount: ")
+    calc.set_weekly_budget(amount)
+    print("\n\nWeekly budget set successfully!")
+
+def weekly_total_terminal():
+    total = calc.get_weekly_total()
+    print(f"\n\nTotal spent this week: {total}")
+    warning = calc.budget_warning()
+    if warning:
+        print(f" {warning}")
+
 while True:
-    # Initial attempt at making the very basic layout of the budget tracker
-    
+    print("\nExpense Tracker Menu:")
     print("1. Add Expense")
     print("2. Remove Expense")
-    print("3. View Expense")
-    print("4. Total Expense")
-    print("5. Exit")
-
-    choice = input("Enter your choice (1-6): ")
-
+    print("3. Edit Expense")
+    print("4. View Expenses")
+    print("5. Total Expenses")
+    print("6. Set Weekly Budget")
+    print("7. Weekly Total & Warning")
+    print("8. Exit")
+    
+    choice = input("Enter your choice (1-8): ")
+    
     if choice == '1':
-        add_expense(expenses)
-
-    if choice == '2':
-        remove_expense(expenses)
-
-    if choice == '3':
-        view_expenses(expenses)
-
-    if choice == '4':
-        total_expense(expenses)
-
-    if choice == '5':
-        edit_expense(expenses)
-
-    if choice == '6':
-        print("Exited Successfully")
+        add_expense_terminal()
+    elif choice == '2':
+        remove_expense_terminal()
+    elif choice == '3':
+        edit_expense_terminal()
+    elif choice == '4':
+        view_expenses_terminal()
+    elif choice == '5':
+        total_expense_terminal()
+    elif choice == '6':
+        weekly_budget_terminal()
+    elif choice == '7':
+        weekly_total_terminal()
+    elif choice == '8':
+        print("Exiting... Goodbye!")
         break
-
-def view_expenses(expenses):
-    if not expenses:
-        print("No expenses to show.")
-        return
-    print("Expenses:")
-    for idx, expense in enumerate(expenses):
-        print(f"{idx}. Date: {expense.date}, Description: {expense.description}, Amount: {expense.amount}")
+    else:
+        print("Invalid choice, please try again.")
