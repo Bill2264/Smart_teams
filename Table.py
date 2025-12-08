@@ -14,4 +14,4 @@ def index():
     
 @app.route("/update")
 def row():
-    data.extend(("11/11/11", "100.0","income","default"),)
+    data.extend(("11/11/11", "100.0","income","default"),)  
